@@ -61,9 +61,7 @@ class NewVersion {
   showAlertIfNecessary(
       {required BuildContext context,
       required String dialogText,
-      required String dialogTitle,
-      required Function dismissAction,
-      required String dismissButtonText,
+      required String dialogTitle,     
       required String updateButtonText}) async {
     final VersionStatus? versionStatus = await getVersionStatus();
     if (versionStatus != null && versionStatus.canUpdate) {
@@ -71,9 +69,7 @@ class NewVersion {
           context: context,
           versionStatus: versionStatus,
           dialogText: dialogText,
-          dialogTitle: dialogTitle,
-          dismissAction: dismissAction,
-          dismissButtonText: dismissButtonText,
+          dialogTitle: dialogTitle,          
           updateButtonText: updateButtonText);
     }
   }
@@ -150,9 +146,7 @@ class NewVersion {
     required VersionStatus versionStatus,
     String dialogTitle = 'Update Available',
     String? dialogText,
-    String updateButtonText = 'Update',
-    String dismissButtonText = 'Maybe Later',
-    VoidCallback? dismissAction,
+    String updateButtonText = 'Update',   
   }) async {
     final dialogTitleWidget = Text(dialogTitle);
     final dialogTextWidget = Text(
