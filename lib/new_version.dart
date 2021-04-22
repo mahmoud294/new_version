@@ -61,7 +61,7 @@ class NewVersion {
   showAlertIfNecessary(
       {required BuildContext context,
       required String dialogText,
-      required String dialogTitle,     
+      required String dialogTitle,      
       required String updateButtonText}) async {
     final VersionStatus? versionStatus = await getVersionStatus();
     if (versionStatus != null && versionStatus.canUpdate) {
@@ -146,17 +146,17 @@ class NewVersion {
     required VersionStatus versionStatus,
     String dialogTitle = 'Update Available',
     String? dialogText,
-    String updateButtonText = 'Update',   
+    String updateButtonText = 'Update',
+    
+    VoidCallback? dismissAction,
   }) async {
     final dialogTitleWidget = Text(dialogTitle);
     final dialogTextWidget = Text(
       dialogText ??
           'You can now update this app from ${versionStatus.localVersion} to ${versionStatus.storeVersion}',
     );
-    final updateButtonTextWidget = Text(updateButtonText);
-    final dismissButtonTextWidget = Text(dismissButtonText);
-    dismissAction =
-        dismissAction ?? () => Navigator.of(context, rootNavigator: true).pop();
+    final updateButtonTextWidget = Text(updateButtonText);    
+    
     final updateAction = () {
       _launchAppStore(versionStatus.appStoreLink);
       Navigator.of(context, rootNavigator: true).pop();
@@ -170,10 +170,7 @@ class NewVersion {
                 title: dialogTitleWidget,
                 content: dialogTextWidget,
                 actions: <Widget>[
-                  TextButton(
-                    child: dismissButtonTextWidget,
-                    onPressed: dismissAction,
-                  ),
+                  
                   TextButton(
                     child: updateButtonTextWidget,
                     onPressed: updateAction,
@@ -184,10 +181,7 @@ class NewVersion {
                 title: dialogTitleWidget,
                 content: dialogTextWidget,
                 actions: <Widget>[
-                  CupertinoDialogAction(
-                    child: dismissButtonTextWidget,
-                    onPressed: dismissAction,
-                  ),
+                  
                   CupertinoDialogAction(
                     child: updateButtonTextWidget,
                     onPressed: updateAction,
